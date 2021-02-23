@@ -1,27 +1,26 @@
 const fs = require("fs");
-// import messageList from "../../data.json";
-const messageList = require("../../data.json");
+
+const messageList = require("../data.json");
 
 module.exports = {
-  index() {
-    // let rawdata = fs.readFileSync("../../");
-    return JSON.parse(messageList);
+  getMessages(request, response) {
+    response.send(messageList);
   },
 
   update(request, response) {
-    const { id } = request.body;
-    // let rawdata = fs.readFileSync("../../data.json");
-    // let messages = JSON.parse(rawdata)
-    let element = {}
-    for (let index = 0; index < messageList.length; index++) {
-        element = messageList[index];
-        if (element.id == id) {
-            break
-        }
+    const id = request.params.id;
+    let messages = require("../data.json");
+    let element = {};
+
+    for (let index = 0; index < messages.length; index++) {
+      element = messages[index];
+      if (element.id == id) {
+        element.read = 1;
+      }
     }
-    element.read = 1;
-    let data = JSON.stringify(element);
-    fs.writeFileSync("../../data.json", data);
-    return response.json({ id });
+
+    fs.writeFileSync("./data.json", JSON.stringify(messages));
+
+    return response.send({ id });
   },
 };

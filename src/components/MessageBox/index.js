@@ -2,6 +2,7 @@ import React from "react";
 import { Text, TouchableHighlight, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { formatDate, formatHour } from "../utils";
+import { messageService } from "../../service/api";
 
 const MessageBox = (props) => {
   let data = props.data;
@@ -22,6 +23,12 @@ const MessageBox = (props) => {
         props.navigation.navigate("Details", {
           data: data,
         });
+        messageService
+          .updateMessage(data.id)
+          .then((res) => {
+            props.messageClicked(1);
+          })
+          .catch((error) => console.log(error));
       }}
       style={styles.container}
     >
@@ -40,13 +47,13 @@ const MessageBox = (props) => {
           </Text>
         </View>
         {data.read ? (
+          <View></View>
+        ) : (
           <View style={{ flex: 1 }}>
             <TouchableHighlight style={styles.dot}>
               <Text style={styles.textDot}>1</Text>
             </TouchableHighlight>
           </View>
-        ) : (
-          <View></View>
         )}
       </View>
     </TouchableOpacity>

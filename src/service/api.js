@@ -1,15 +1,16 @@
-// import axios from 'axios'
+import axios from 'axios'
 
-// const api = axios.create({
-//     baseURL: 'http://10.0.2.2:3333'
-// });
+const api = axios.create({
+    baseURL: 'http://10.0.2.2:3333'
+});
 
-// export default api;
+export default api;
 
-import axios from 'axios';
+export const PATH = 'messages'
 
-export const getMessages = () => {
-  const uri = 'http://10.0.2.2:3333/messages'
+export const messageService = {
+  getMessages: () => api.get(`${PATH}`),
 
-  return axios.get(uri).then((response) => response.data.messages);
-};
+  updateMessage: (id) => api.post(`${PATH}/${id}`),
+}
+
