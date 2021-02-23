@@ -1,9 +1,8 @@
 const fs = require("fs");
 
-const messageList = require("../data.json");
-
 module.exports = {
   getMessages(request, response) {
+    const messageList = require("../data.json");
     response.send(messageList);
   },
 

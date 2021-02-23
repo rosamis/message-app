@@ -6,7 +6,8 @@ import { messageService } from "../../service/api";
 
 const MessageBox = (props) => {
   let data = props.data;
-  let dateFile = new Date(data.date);
+  let lastMessage = data["messages"][data["messages"].length -1];
+  let dateFile = new Date(lastMessage.date);
   let date = "";
   let current = new Date();
 
@@ -43,7 +44,7 @@ const MessageBox = (props) => {
       <View style={{ flexDirection: "row" }}>
         <View style={{ flex: 9 }}>
           <Text style={styles.message} numberOfLines={2} ellipsizeMode="tail">
-            {data.message}
+            {lastMessage.message}
           </Text>
         </View>
         {data.read ? (

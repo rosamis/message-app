@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect } from "react";
-import MessageReceived from "../../components/MessageReceived";
+import Chat from "../../components/Chat";
 
 const MessageDetails = ({ route }) => {
   const { data } = route.params;
@@ -14,7 +14,7 @@ const MessageDetails = ({ route }) => {
 
   return (
     <SafeAreaView>
-      <MessageReceived message={data.message} date={data.date} />
+      <Chat messages={data.messages} />
     </SafeAreaView>
   );
 };

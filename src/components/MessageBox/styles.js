@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 15,
-    // justifyContent: "flex-start",
     color: "#323232",
   },
   date: {
